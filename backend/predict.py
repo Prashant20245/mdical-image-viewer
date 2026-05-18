@@ -51,14 +51,3 @@ def predict_tumor(image_path: str):
 
 
 
-# import random
-
-
-# def predict_tumor(image_path: str):
-#     prediction = random.choice(["Tumor", "No Tumor"])
-#     confidence = round(random.uniform(75, 98), 2)
-
-#     return {
-#         "prediction": prediction,
-#         "confidence": confidence,
-#     }
