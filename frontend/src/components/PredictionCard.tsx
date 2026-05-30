@@ -48,27 +48,3 @@ export default function PredictionCard({ prediction }: PredictionCardProps) {
     </Card>
   );
 }
-
-// import { Card, CardContent } from "@/components/ui/card";
-// import { Progress } from "@/components/ui/progress";
-
-// export default function PredictionCard() {
-//   const confidence = 82;
-
-//   return (
-//     <Card className="rounded-2xl shadow-lg p-6">
-//       <CardContent className="space-y-4">
-//         <h2 className="text-xl font-semibold">Tumor Prediction</h2>
-
-//         <div>
-//           <p className="text-lg font-bold text-red-600">Tumor Detected</p>
-//           <p className="text-sm text-slate-500">
-//             Confidence Score: {confidence}%
-//           </p>
-//         </div>
-
-//         <Progress value={confidence} />
-//       </CardContent>
-//     </Card>
-//   );
-// }
