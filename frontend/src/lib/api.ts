@@ -9,6 +9,7 @@ const API = axios.create({
 // =========================
 export const uploadMedicalImage = async (file: File) => {
   const formData = new FormData();
+
   formData.append("file", file);
 
   const response = await API.post("/analyze", formData, {
@@ -32,17 +33,13 @@ export const saveAnnotation = async (data: {
   height: number;
   note: string;
 }) => {
-  const response = await API.post("/save-annotation", data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await API.post("/save-annotation", data);
 
   return response.data;
 };
 
 // =========================
-// Fetch All Reports History
+// Fetch Reports
 // =========================
 export const fetchReports = async () => {
   const response = await API.get("/reports");
@@ -51,7 +48,7 @@ export const fetchReports = async () => {
 };
 
 // =========================
-// Fetch Annotations By Report
+// Fetch Report Annotations
 // =========================
 export const fetchAnnotationsByReport = async (reportId: string) => {
   const response = await API.get(`/annotations/${reportId}`);
@@ -60,31 +57,63 @@ export const fetchAnnotationsByReport = async (reportId: string) => {
 };
 
 // =========================
-// Save Final Medical Report
+// Save Final Report
 // =========================
 export const saveFinalReport = async (data: {
-  patient: {
-    patient_name: string;
-    patient_id: string;
-    age: string;
-    gender: string;
-    symptoms: string;
-  };
-  doctor: {
-    doctor_name: string;
-    department: string;
-    hospital: string;
-  };
+  patient: any;
+  doctor: any;
   filename: string;
   compression: any;
   prediction: any;
   annotations: any[];
 }) => {
-  const response = await API.post("/save-report", data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await API.post("/save-report", data);
 
   return response.data;
+};
+
+// =========================
+// Doctor Register
+// =========================
+export const registerDoctor = async (data: {
+  doctor_name: string;
+  email: string;
+  password: string;
+  department: string;
+  hospital: string;
+}) => {
+  const response = await API.post("/register", data);
+
+  return response.data;
+};
+
+// =========================
+// Doctor Login
+// =========================
+export const loginDoctor = async (data: {
+  email: string;
+  password: string;
+}) => {
+  const response = await API.post("/login", data);
+
+  return response.data;
+};
+
+// =========================
+// Local Storage Helpers
+// =========================
+export const saveDoctorSession = (doctor: any) => {
+  localStorage.setItem("doctor", JSON.stringify(doctor));
+};
+
+export const getLoggedDoctor = () => {
+  if (typeof window === "undefined") return null;
+
+  const doctor = localStorage.getItem("doctor");
+
+  return doctor ? JSON.parse(doctor) : null;
+};
+
+export const logoutDoctor = () => {
+  localStorage.removeItem("doctor");
 };

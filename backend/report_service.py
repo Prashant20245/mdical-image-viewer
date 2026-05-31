@@ -16,20 +16,13 @@ def save_report(
     Patient + Doctor + Compression + Prediction + ROI + Notes
     """
 
-    # =========================
-    # Unique Human-Friendly Report ID
-    # =========================
     report_id = f"RPT-{uuid.uuid4().hex[:8].upper()}"
 
-    # =========================
-    # Full Medical Report Document
-    # =========================
     report = {
-        # Core IDs
         "report_id": report_id,
         "filename": filename,
 
-        # Patient Information
+        # Patient
         "patient": {
             "patient_name": patient_data.get("patient_name"),
             "patient_id": patient_data.get("patient_id"),
@@ -38,20 +31,21 @@ def save_report(
             "symptoms": patient_data.get("symptoms"),
         },
 
-        # Doctor Information
+        # Doctor
         "doctor": {
             "doctor_name": doctor_data.get("doctor_name"),
+            "email": doctor_data.get("email"),
             "department": doctor_data.get("department"),
             "hospital": doctor_data.get("hospital"),
         },
 
-        # AI Prediction Section
+        # Prediction
         "prediction": {
             "result": prediction_data.get("prediction"),
             "confidence": prediction_data.get("confidence"),
         },
 
-        # Compression Section
+        # Compression
         "compression": {
             "compressed_path": compression_data.get("compressed_path"),
             "original_size_mb": compression_data.get("original_size_mb"),
@@ -59,19 +53,13 @@ def save_report(
             "compression_ratio": compression_data.get("compression_ratio"),
         },
 
-        # ROI / Annotation Section
+        # ROI
         "annotations": annotations,
 
-        # Metadata
         "status": "Final Saved",
         "created_at": datetime.utcnow(),
     }
 
-    # =========================
-    # Insert into MongoDB
-    # =========================
-    result = reports_collection.insert_one(report)
+    reports_collection.insert_one(report)
 
     return report_id
-
-

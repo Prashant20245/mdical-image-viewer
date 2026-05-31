@@ -54,7 +54,7 @@ export default function UploadBox({
 
   return (
     <Card className="rounded-2xl shadow-lg p-6">
-      <CardContent className="flex flex-col items-center justify-center space-y-6">
+      <CardContent className="flex flex-col items-center justify-center space-y-4">
         {/* Header */}
         <div className="text-center">
           <h2 className="text-2xl font-bold">Upload CT / MRI Scan</h2>
@@ -65,7 +65,7 @@ export default function UploadBox({
         </div>
 
         {/* Upload Area */}
-        <label className="border-2 border-dashed border-slate-400 rounded-2xl p-10 w-full text-center cursor-pointer hover:border-cyan-500 hover:bg-cyan-50 transition">
+        <label className="border-2 border-dashed border-slate-400 rounded-2xl p-5 w-full text-center cursor-pointer hover:border-cyan-500 hover:bg-cyan-50 transition">
           <input
             type="file"
             accept="image/png, image/jpeg, image/jpg"
